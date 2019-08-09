@@ -1,3 +1,16 @@
+
 steps:
-- name: 'gcr.io/alvaro-gcp/remote-builder'
-  args: ['packer', 'version']
+- name: gcr.io/$PROJECT_ID/remote-builder
+  waitFor: ["-"]
+  env:
+    - ZONE=us-central1-f
+    - USERNAME=cloud-user
+    # Run a script from the local build context in a Docker container
+    - COMMAND=packer version
+- name: gcr.io/$PROJECT_ID/remote-builder
+  waitFor: ["-"]
+  env:
+    - ZONE=us-central1-f
+    - USERNAME=cloud-user
+    # Run a script from the local build context in a Docker container
+    - COMMAND=vagrant version
