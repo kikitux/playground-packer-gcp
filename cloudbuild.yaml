@@ -4,6 +4,6 @@ steps:
   waitFor: ["-"]
   env:
     - INSTANCE_ARGS=--image nestedvbox
-    - ZONE=europe-west4-a
+    # - ZONE=europe-west4-a
     - USERNAME=cloud-user
     - COMMAND=packer version
