@@ -6,5 +6,4 @@ steps:
     - INSTANCE_ARGS=--image nestedvbox --preemptible
     - ZONE=europe-west4-a
     - USERNAME=cloud-user
-    - REMOTE_WORKSPACE=/var/tmp/workspace
-    - COMMAND=bash /var/tmp/workspace/build.sh
+    - COMMAND=packer version
