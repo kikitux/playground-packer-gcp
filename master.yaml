@@ -23,5 +23,6 @@ steps:
   timeout: 2400s
   waitFor:
   - BUILD
-    args: [ 'cloud auth login --token ${_TOKEN}']
-    args: [ 'vagrant cloud auth login --check']
+    env:
+    - ATLAS_TOKEN=${_TOKEN}
+    args: [ 'cloud auth login --check']
