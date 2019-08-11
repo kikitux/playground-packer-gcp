@@ -25,6 +25,6 @@ steps:
   - BUILD
   env:
     - ATLAS_TOKEN=${_TOKEN}
-  args: [ 'cloud auth login --check']
+  args: [ 'cloud', 'auth login --check']
 substitutions:
   _TOKEN: TOKEN # default value
