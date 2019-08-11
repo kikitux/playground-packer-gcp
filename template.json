@@ -81,12 +81,8 @@
     {
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
       "expect_disconnect": true,
-      "script": "scripts/packages.sh",
-      "type": "shell"
-    },
-    {
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
       "scripts": [
+        "scripts/packages.sh",
         "scripts/vagrant.sh",
         "scripts/virtualbox.sh",
         "scripts/virtualbox_cleanup.sh"
