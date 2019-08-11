@@ -9,4 +9,5 @@ packer version
 packer validate template.json
 set -e
 packer build template.json
-ls -al 
+set +e
+rm -fr  packer_cache/ output-*
