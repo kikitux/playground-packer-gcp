@@ -58,6 +58,12 @@
         [
           "modifyvm",
           "{{.Name}}",
+          "--natsettings1",
+          "1460,64,64,0,0"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
           "--memory",
           "{{user `build_memory`}}"
         ],
