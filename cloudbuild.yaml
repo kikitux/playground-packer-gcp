@@ -3,7 +3,7 @@ steps:
 - name: gcr.io/$PROJECT_ID/remote-builder
   waitFor: ["-"]
   env:
-    - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible
+    - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
     - ZONE=europe-west4-a
     - USERNAME=packer
     - COMMAND=bash /home/packer/workspace/build.sh
