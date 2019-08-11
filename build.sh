@@ -1,7 +1,7 @@
 uname -a
 id
 df -Ph
-pushd /home/cloud-user/workspace
+pushd /home/packer/workspace
 ls -al 
 packer version
 packer validate template.json
