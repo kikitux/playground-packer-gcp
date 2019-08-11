@@ -1,6 +1,7 @@
-
+timeout: 1800s
 steps:
 - name: gcr.io/$PROJECT_ID/remote-builder
+  timeout: 1200s
   waitFor: ["-"]
   env:
     - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
