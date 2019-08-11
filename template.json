@@ -89,8 +89,7 @@
       "scripts": [
         "scripts/vagrant.sh",
         "scripts/virtualbox.sh",
-        "scripts/virtualbox_cleanup.sh",
-        "scripts/zero.sh"
+        "scripts/virtualbox_cleanup.sh"
       ],
       "type": "shell"
     }
@@ -102,15 +101,6 @@
         "keep_input_artifact": true,
         "compression_level": 9,
         "output": "{{.BuildName}}.box"
-      },
-      {
-        "type": "shell-local",
-        "only": [
-          "{{ user `build_name` }}-vbox"
-        ],
-        "inline": [
-          "vagrant box add --name {{ user `build_name` }} --provider virtualbox {{ user `build_name` }}-vbox.box -f"
-        ]
       }
     ]
   ]
