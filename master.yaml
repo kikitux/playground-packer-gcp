@@ -23,8 +23,8 @@ steps:
   timeout: 2400s
   waitFor:
   - BUILD
-  substitutions:
-    _TOKEN: TOKEN # default value
   env:
     - ATLAS_TOKEN=${_TOKEN}
   args: [ 'cloud auth login --check']
+substitutions:
+  _TOKEN: TOKEN # default value
