@@ -1,6 +1,6 @@
 pushd /home/packer/workspace
-packer validate template.json
+packer validate bionic64.json
 set -e
-packer build template.json
+packer build bionic64.json
 set +e
 rm -fr  packer_cache/
