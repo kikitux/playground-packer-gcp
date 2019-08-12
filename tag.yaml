@@ -1,17 +1,18 @@
 timeout: 4800s
 steps:
 - name: gcr.io/$PROJECT_ID/remote-builder
-  id: BUILD
+  id: BUILD-BIONIC64
   timeout: 2400s
   env:
     - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
     - ZONE=europe-west4-a
     - USERNAME=packer
-    - COMMAND=bash /home/packer/workspace/build.sh
+    - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer -var "wd=/home/packer/workspace" build bionic64.json
 - name: gcr.io/$PROJECT_ID/vagrant
+  id: PUBLISH-BIONIC64
   timeout: 2400s
   waitFor:
-  - BUILD
+  - BUILD-BIONIC64
   env:
     - ATLAS_TOKEN=${_TOKEN}
   args:
@@ -23,10 +24,18 @@ steps:
   - 'bionic64-vbox.box'
   - '--release'
   - '--force'
+- name: gcr.io/$PROJECT_ID/remote-builder
+  id: BUILD-BIONIC64-NGINX
+  timeout: 2400s
+  env:
+    - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
+    - ZONE=europe-west4-a
+    - USERNAME=packer
+    - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer -var "wd=/home/packer/workspace" build bionic64-nginx.json  
 - name: gcr.io/$PROJECT_ID/vagrant
   timeout: 2400s
   waitFor:
-  - BUILD
+  - BUILD-BIONIC64-NGINX
   env:
     - ATLAS_TOKEN=${_TOKEN}
   args:
