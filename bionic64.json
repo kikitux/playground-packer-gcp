@@ -54,6 +54,7 @@
       "ssh_password": "{{user `ssh_username`}}",
       "ssh_username": "{{user `ssh_password`}}",
       "ssh_wait_timeout": "20m",
+      "output_directory": "{{user `wd`}}/output-{{ user `build_name` }}-vbox",
       "type": "virtualbox-iso",
       "vboxmanage": [
         [
@@ -97,7 +98,7 @@
         "type": "vagrant",
         "keep_input_artifact": true,
         "compression_level": 9,
-        "output": "{{.BuildName}}.box"
+        "output": "{{user `wd`}}/{{.BuildName}}.box"
       }
     ]
   ]
