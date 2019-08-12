@@ -10,7 +10,7 @@
     {
       "name": "{{ user `build_name` }}-vbox",
       "vm_name": "{{ user `build_name` }}-vbox",
-      "source_path": "output-bionic64-vbox/bionic64-vbox.ovf",
+      "source_path": "{{user `wd`}}/output-bionic64-vbox/bionic64-vbox.ovf",
       "headless": "{{user `headless`}}",
       "shutdown_command": "echo 'vagrant' | sudo -S poweroff",
       "ssh_password": "{{user `ssh_username`}}",
