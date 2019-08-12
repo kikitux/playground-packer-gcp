@@ -17,7 +17,7 @@ steps:
   args:
   - 'cloud'
   - 'publish'
-  - 'bionic64'
+  - 'kikitux/bionic64'
   - '$TAG_NAME'
   - 'virtualbox'
   - 'bionic64-vbox.box'
@@ -32,7 +32,7 @@ steps:
   args:
   - 'cloud'
   - 'publish'
-  - 'alvaro/bionic64-nginx'
+  - 'kikitux/bionic64-nginx'
   - '$TAG_NAME'
   - 'virtualbox'
   - 'bionic64-nginx-vbox.box'
