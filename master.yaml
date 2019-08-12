@@ -33,5 +33,6 @@ steps:
   - 'virtualbox'
   - 'bionic64-vbox.box'
   - '--release'
+  - '--force'
 substitutions:
   _TOKEN: TOKEN # default value
