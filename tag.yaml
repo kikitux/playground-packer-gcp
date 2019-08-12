@@ -1,8 +1,8 @@
-timeout: 4800s
+timeout: 9000s
 steps:
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64
-  timeout: 2400s
+  timeout: 3000s
   env:
     - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
     - ZONE=europe-west4-a
@@ -10,7 +10,7 @@ steps:
     - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer build -var 'wd=/home/packer/workspace' /home/packer/workspace/bionic64.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64
-  timeout: 2400s
+  timeout: 3000s
   waitFor:
   - BUILD-BIONIC64
   env:
@@ -26,7 +26,7 @@ steps:
   - '--force'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-NGINX
-  timeout: 2400s
+  timeout: 3000s
   waitFor:
   - BUILD-BIONIC64
   env:
@@ -36,7 +36,7 @@ steps:
     - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer build -var 'wd=/home/packer/workspace' /home/packer/workspace/bionic64-nginx.json  
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-NGINX
-  timeout: 2400s
+  timeout: 3000s
   waitFor:
   - BUILD-BIONIC64-NGINX
   env:
