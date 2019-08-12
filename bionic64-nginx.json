@@ -3,7 +3,8 @@
     "build_name": "bionic64-nginx",
     "headless": "true",
     "ssh_username": "vagrant",
-    "ssh_password": "vagrant"
+    "ssh_password": "vagrant",
+    "wd": "./"
   },
   "builders": [
     {
@@ -32,7 +33,7 @@
     {
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
       "expect_disconnect": true,
-      "script": "scripts/virtualbox_cleanup.sh",
+      "script": "{{user `wd`}}/scripts/virtualbox_cleanup.sh",
       "type": "shell"
     }
   ],
