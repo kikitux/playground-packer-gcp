@@ -10,7 +10,7 @@
     "iso_url": "http://cdimage.ubuntu.com/ubuntu/releases/18.04/release/ubuntu-18.04.3-server-amd64.iso",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
-    "cwd": "./"
+    "wd": "./"
   },
   "builders": [
     {
@@ -83,10 +83,10 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
-        "{{user `cwd`}}/scripts/packages.sh",
-        "{{user `cwd`}}/scripts/vagrant.sh",
-        "{{user `cwd`}}/scripts/virtualbox.sh",
-        "{{user `cwd`}}/scripts/virtualbox_cleanup.sh"
+        "{{user `wd`}}/scripts/packages.sh",
+        "{{user `wd`}}/scripts/vagrant.sh",
+        "{{user `wd`}}/scripts/virtualbox.sh",
+        "{{user `wd`}}/scripts/virtualbox_cleanup.sh"
       ],
       "type": "shell"
     }
