@@ -14,10 +14,7 @@ steps:
     - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
     - ZONE=europe-west4-a
     - USERNAME=packer
-    - SHOWENV=true
-    - SHOWLS=true
-    - SHOWDU=true
-    - COMMAND=bash /home/packer/workspace/build.sh
+    - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache packer build /home/packer/workspace/template.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUSH
   timeout: 2400s
