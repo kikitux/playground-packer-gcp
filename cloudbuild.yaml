@@ -3,4 +3,4 @@ steps:
   id: VALIDATE
   args:
   - validate
-  - template.json
+  - bionic64.json
