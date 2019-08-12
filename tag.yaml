@@ -1,22 +1,14 @@
 timeout: 4800s
 steps:
-- name: hashicorp/packer
-  id: VALIDATE
-  args:
-  - validate
-  - bionic64.json  
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD
   timeout: 2400s
-  waitFor:
-  - VALIDATE
   env:
     - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
     - ZONE=europe-west4-a
     - USERNAME=packer
     - COMMAND=bash /home/packer/workspace/build.sh
 - name: gcr.io/$PROJECT_ID/vagrant
-  id: PUSH
   timeout: 2400s
   waitFor:
   - BUILD
@@ -25,10 +17,25 @@ steps:
   args:
   - 'cloud'
   - 'publish'
-  - 'alvaro/supertest'
+  - 'bionic64'
   - '$TAG_NAME'
   - 'virtualbox'
   - 'bionic64-vbox.box'
+  - '--release'
+  - '--force'
+- name: gcr.io/$PROJECT_ID/vagrant
+  timeout: 2400s
+  waitFor:
+  - BUILD
+  env:
+    - ATLAS_TOKEN=${_TOKEN}
+  args:
+  - 'cloud'
+  - 'publish'
+  - 'alvaro/bionic64-nginx'
+  - '$TAG_NAME'
+  - 'virtualbox'
+  - 'bionic64-nginx-vbox.box'
   - '--release'
   - '--force'
 substitutions:

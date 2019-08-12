@@ -1,0 +1,49 @@
+{
+  "variables": {
+    "build_name": "bionic64-nginx",
+    "headless": "true",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant"
+  },
+  "builders": [
+    {
+      "name": "{{ user `build_name` }}-vbox",
+      "vm_name": "{{ user `build_name` }}-vbox",
+      "source_path": "output-bionic64-vbox/bionic64-vbox.ovf",
+      "headless": "{{user `headless`}}",
+      "shutdown_command": "echo 'vagrant' | sudo -S poweroff",
+      "ssh_password": "{{user `ssh_username`}}",
+      "ssh_username": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "20m",
+      "type": "virtualbox-ovf"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
+      "expect_disconnect": true,
+      "inline": [
+        "export DEBIAN_FRONTEND=noninteractive",
+        "apt-get update",
+        "apt-get install -y nginx"
+      ],
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
+      "expect_disconnect": true,
+      "script": "scripts/virtualbox_cleanup.sh",
+      "type": "shell"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "vagrant",
+        "keep_input_artifact": true,
+        "compression_level": 9,
+        "output": "{{.BuildName}}.box"
+      }
+    ]
+  ]
+}
