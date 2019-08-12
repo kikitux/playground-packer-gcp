@@ -4,7 +4,7 @@ steps:
   id: VALIDATE
   args:
   - validate
-  - template.json  
+  - bionic64.json  
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD
   timeout: 2400s
