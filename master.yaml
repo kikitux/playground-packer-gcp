@@ -17,7 +17,7 @@ steps:
     - SHOWENV=true
     - SHOWLS=true
     - SHOWDU=true
-    - COMMAND=echo bash /home/packer/workspace/build.sh
+    - COMMAND=bash /home/packer/workspace/build.sh
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUSH
   timeout: 2400s
@@ -25,6 +25,13 @@ steps:
   - BUILD
   env:
     - ATLAS_TOKEN=${_TOKEN}
-  args: [ 'cloud', 'auth', 'login', '--check' ]
+  args:
+  - 'cloud'
+  - 'publish'
+  - 'alvaro/supertest'
+  - '$TAG_NAME'
+  - 'virtualbox'
+  - 'bionic64-vbox.box'
+  - '--release'
 substitutions:
   _TOKEN: TOKEN # default value
