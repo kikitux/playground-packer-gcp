@@ -50,5 +50,31 @@ steps:
   - 'bionic64-nginx-vbox.box'
   - '--release'
   - '--force'
+- name: gcr.io/$PROJECT_ID/remote-builder
+  id: BUILD-BIONIC64-REDIS
+  timeout: 3000s
+  waitFor:
+  - BUILD-BIONIC64
+  env:
+    - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
+    - ZONE=europe-west4-a
+    - USERNAME=packer
+    - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer build -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-redis.json  
+- name: gcr.io/$PROJECT_ID/vagrant
+  id: PUBLISH-BIONIC64-REDIS
+  timeout: 3000s
+  waitFor:
+  - BUILD-BIONIC64-REDIS
+  env:
+    - ATLAS_TOKEN=${_TOKEN}
+  args:
+  - 'cloud'
+  - 'publish'
+  - 'kikitux/bionic64-redis'
+  - '$TAG_NAME'
+  - 'virtualbox'
+  - 'bionic64-redis-vbox.box'
+  - '--release'
+  - '--force'  
 substitutions:
   _TOKEN: TOKEN # default value
