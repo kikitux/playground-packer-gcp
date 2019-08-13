@@ -1,0 +1,51 @@
+{
+  "variables": {
+    "build_name": "bionic64-redis",
+    "headless": "true",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "wd": "./"
+  },
+  "builders": [
+    {
+      "name": "{{ user `build_name` }}-vbox",
+      "vm_name": "{{ user `build_name` }}-vbox",
+      "source_path": "{{user `wd`}}/output-bionic64-vbox/bionic64-vbox.ovf",
+      "headless": "{{user `headless`}}",
+      "shutdown_command": "echo 'vagrant' | sudo -S poweroff",
+      "ssh_password": "{{user `ssh_username`}}",
+      "ssh_username": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "20m",
+      "output_directory": "{{user `wd`}}/output-{{ user `build_name` }}-vbox",
+      "type": "virtualbox-ovf"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
+      "expect_disconnect": true,
+      "inline": [
+        "export DEBIAN_FRONTEND=noninteractive",
+        "apt-get update",
+        "apt-get install -y redis-server redis-cli"
+      ],
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
+      "expect_disconnect": true,
+      "script": "{{user `wd`}}/scripts/virtualbox_cleanup.sh",
+      "type": "shell"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "vagrant",
+        "keep_input_artifact": true,
+        "compression_level": 9,
+        "output": "{{user `wd`}}/{{.BuildName}}.box"
+      }
+    ]
+  ]
+}
