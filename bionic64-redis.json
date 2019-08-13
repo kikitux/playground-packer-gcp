@@ -27,7 +27,7 @@
       "inline": [
         "export DEBIAN_FRONTEND=noninteractive",
         "apt-get update",
-        "apt-get install -y redis-server redis-cli"
+        "apt-get install -y redis-server redis-tools"
       ],
       "type": "shell"
     },
