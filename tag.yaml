@@ -33,7 +33,7 @@ steps:
     - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
     - ZONE=europe-west4-a
     - USERNAME=packer
-    - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer build -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-nginx.json  
+    - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer build -var "build_name=bionic64-nginx" -var "packages=nginx" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-ovf.json  
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-NGINX
   timeout: 3000s
@@ -59,7 +59,7 @@ steps:
     - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
     - ZONE=europe-west4-a
     - USERNAME=packer
-    - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer build -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-redis.json  
+    - COMMAND=PACKER_CACHE_DIR=/var/tmp/packer_cache time packer build -var "build_name=bionic64-redis" -var "packages=redis-server redis-tools" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-ovf.json  
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-REDIS
   timeout: 3000s
