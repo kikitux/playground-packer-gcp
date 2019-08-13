@@ -1,6 +1,7 @@
 {
   "variables": {
-    "build_name": "bionic64-nginx",
+    "build_name": "",
+    "packages": "",
     "headless": "true",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
@@ -23,11 +24,14 @@
   "provisioners": [
     {
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
+      "environment_vars": [
+        "packages={{user `packages`}}"
+      ],
       "expect_disconnect": true,
       "inline": [
         "export DEBIAN_FRONTEND=noninteractive",
         "apt-get update",
-        "apt-get install -y nginx"
+        "apt-get install -y ${packages}"
       ],
       "type": "shell"
     },
