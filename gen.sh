@@ -32,7 +32,7 @@ cat <<EOF
   waitFor:
   - BUILD-BIONIC64-${b^^}
   env:
-    - ATLAS_TOKEN=${_TOKEN}
+    - ATLAS_TOKEN=\${_TOKEN}
   args:
   - 'cloud'
   - 'publish'

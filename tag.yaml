@@ -15,7 +15,7 @@ steps:
   waitFor:
   - BUILD-BIONIC64-NGINX
   env:
-    - ATLAS_TOKEN=
+    - ATLAS_TOKEN=${_TOKEN}
   args:
   - 'cloud'
   - 'publish'
@@ -40,7 +40,7 @@ steps:
   waitFor:
   - BUILD-BIONIC64-JRE
   env:
-    - ATLAS_TOKEN=
+    - ATLAS_TOKEN=${_TOKEN}
   args:
   - 'cloud'
   - 'publish'
@@ -65,7 +65,7 @@ steps:
   waitFor:
   - BUILD-BIONIC64-JDK
   env:
-    - ATLAS_TOKEN=
+    - ATLAS_TOKEN=${_TOKEN}
   args:
   - 'cloud'
   - 'publish'
@@ -90,7 +90,7 @@ steps:
   waitFor:
   - BUILD-BIONIC64-MYSQL
   env:
-    - ATLAS_TOKEN=
+    - ATLAS_TOKEN=${_TOKEN}
   args:
   - 'cloud'
   - 'publish'
@@ -115,7 +115,7 @@ steps:
   waitFor:
   - BUILD-BIONIC64-REDIS
   env:
-    - ATLAS_TOKEN=
+    - ATLAS_TOKEN=${_TOKEN}
   args:
   - 'cloud'
   - 'publish'
@@ -140,7 +140,7 @@ steps:
   waitFor:
   - BUILD-BIONIC64-PHP
   env:
-    - ATLAS_TOKEN=
+    - ATLAS_TOKEN=${_TOKEN}
   args:
   - 'cloud'
   - 'publish'
@@ -165,7 +165,7 @@ steps:
   waitFor:
   - BUILD-BIONIC64-DEV
   env:
-    - ATLAS_TOKEN=
+    - ATLAS_TOKEN=${_TOKEN}
   args:
   - 'cloud'
   - 'publish'
@@ -190,7 +190,7 @@ steps:
   waitFor:
   - BUILD-BIONIC64-DOCKER
   env:
-    - ATLAS_TOKEN=
+    - ATLAS_TOKEN=${_TOKEN}
   args:
   - 'cloud'
   - 'publish'
