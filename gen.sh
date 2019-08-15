@@ -13,12 +13,6 @@ build["dev"]="git curl wget build-essential"
 cat <<EOF
 timeout: 9000s
 steps:
-- name: pstauffer/curl
-  id: whatsmyip
-  args:
-  - 'curl'
-  - '-sL'
-  - 'https://myexternalip.com/raw'
 EOF
 
 for b in ${!build[*]}; do 
@@ -34,8 +28,6 @@ cat <<EOF
     - COMMAND=packer build -var "build_name=bionic64-${b}" -var "packages=${build["$b"]}" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/\$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-${b^^}
-  waitFor:
-  - BUILD-BIONIC64-${b^^}
   timeout: 3000s
   env:
     - ATLAS_TOKEN=\${_TOKEN}
@@ -48,7 +40,6 @@ cat <<EOF
   - 'bionic64-${b}/package.box'
   - '--release'
   - '--force'
-  - '--debug'
 EOF
 done
 
