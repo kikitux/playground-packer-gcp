@@ -1,5 +1,11 @@
 timeout: 9000s
 steps:
+- name: pstauffer/curl
+  id: whatsmyip
+  args:
+  - 'curl'
+  - '-sL'
+  - 'https://ipinfo.io/ip'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-JRE
   timeout: 3000s
@@ -23,6 +29,7 @@ steps:
   - 'bionic64-jre/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-MYSQL
   timeout: 3000s
@@ -46,6 +53,7 @@ steps:
   - 'bionic64-mysql/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-PHP
   timeout: 3000s
@@ -69,6 +77,7 @@ steps:
   - 'bionic64-php/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-REDIS
   timeout: 3000s
@@ -92,6 +101,7 @@ steps:
   - 'bionic64-redis/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-DOCKER
   timeout: 3000s
@@ -115,6 +125,7 @@ steps:
   - 'bionic64-docker/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-DEV
   timeout: 3000s
@@ -138,6 +149,7 @@ steps:
   - 'bionic64-dev/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-JDK
   timeout: 3000s
@@ -161,6 +173,7 @@ steps:
   - 'bionic64-jdk/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-NGINX
   timeout: 3000s
@@ -184,5 +197,6 @@ steps:
   - 'bionic64-nginx/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 substitutions:
   _TOKEN: TOKEN # default value

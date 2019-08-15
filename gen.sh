@@ -13,6 +13,12 @@ build["dev"]="git curl wget build-essential"
 cat <<EOF
 timeout: 9000s
 steps:
+- name: pstauffer/curl
+  id: whatsmyip
+  args:
+  - 'curl'
+  - '-sL'
+  - 'https://ipinfo.io/ip'
 EOF
 
   #waitFor:
@@ -43,6 +49,7 @@ cat <<EOF
   - 'bionic64-${b}/package.box'
   - '--release'
   - '--force'
+  - '--debug'
 EOF
 done
 
