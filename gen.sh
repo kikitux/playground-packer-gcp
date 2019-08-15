@@ -17,7 +17,7 @@ EOF
 
 for b in ${!build[*]}; do 
 cat <<EOF
-- name: gcr.io/$PROJECT_ID/remote-builder
+- name: gcr.io/\$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-${b^^}
   timeout: 3000s
   waitFor: ["-"]
@@ -26,7 +26,7 @@ cat <<EOF
     - ZONE=europe-west4-a
     - USERNAME=packer
     - COMMAND=packer build -var "build_name=bionic64-${b}" -var "packages=${build["$b"]}" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
-- name: gcr.io/$PROJECT_ID/vagrant
+- name: gcr.io/\$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-${b^^}
   timeout: 3000s
   waitFor:
