@@ -3,4 +3,4 @@ steps:
   id: VALIDATE
   args:
   - validate
-  - bionic64.json
+  - bionic64-vagrant.json
