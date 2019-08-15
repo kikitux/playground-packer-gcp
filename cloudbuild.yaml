@@ -1,4 +1,10 @@
 steps:
+- name: pstauffer/curl
+  id: whatsmyip
+  args:
+  - 'curl'
+  - '-sL'
+  - 'https://ipinfo.io/ip'
 - name: hashicorp/packer
   id: VALIDATE
   args:
