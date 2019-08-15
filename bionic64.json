@@ -45,7 +45,7 @@
       "disk_size": "{{user `disk_size`}}",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "guest_os_type": "Ubuntu_64",
-      "headless": "{{user `headless`}}",
+      "headles": "{{user `headless`}}",
       "http_directory": "{{user `wd`}}/http",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -54,9 +54,9 @@
       "ssh_password": "{{user `ssh_username`}}",
       "ssh_username": "{{user `ssh_password`}}",
       "ssh_wait_timeout": "20m",
-      "output_directory": "{{user `wd`}}/output-{{ user `build_name` }}-vbox",
+      "outpu_directory": "{{user `wd`}}/output-{{ user `build_name` }}-vbox",
       "type": "virtualbox-iso",
-      "vboxmanage": [
+      "vboxmmanage": [
         [
           "modifyvm",
           "{{.Name}}",
