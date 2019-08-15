@@ -2,23 +2,15 @@
   "variables": {
     "build_name": "",
     "packages": "",
-    "headless": "true",
-    "ssh_username": "vagrant",
-    "ssh_password": "vagrant",
     "wd": "./"
   },
   "builders": [
     {
-      "name": "{{ user `build_name` }}-vbox",
-      "vm_name": "{{ user `build_name` }}-vbox",
-      "source_path": "{{user `wd`}}/output-bionic64-vbox/bionic64-vbox.ovf",
-      "headless": "{{user `headless`}}",
-      "shutdown_command": "echo 'vagrant' | sudo -S poweroff",
-      "ssh_password": "{{user `ssh_username`}}",
-      "ssh_username": "{{user `ssh_password`}}",
-      "ssh_wait_timeout": "20m",
-      "output_directory": "{{user `wd`}}/output-{{ user `build_name` }}-vbox",
-      "type": "virtualbox-ovf"
+      "communicator": "ssh",
+      "source_path": "kikitux/bionic64",
+      "provider": "virtualbox",
+      "add_force": true,
+      "type": "vagrant"
     }
   ],
   "provisioners": [
