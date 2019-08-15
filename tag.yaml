@@ -33,7 +33,7 @@ steps:
     - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
     - ZONE=europe-west4-a
     - USERNAME=packer
-    - COMMAND=build -var "build_name=bionic64-redis" -var "packages=redis-server redis-tools" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json  
+    - COMMAND=packer build -var "build_name=bionic64-redis" -var "packages=redis-server redis-tools" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json  
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-REDIS
   timeout: 3000s
@@ -50,6 +50,31 @@ steps:
   - 'bionic64-redis/package.box'
   - '--release'
   - '--force' 
+- name: gcr.io/$PROJECT_ID/remote-builder
+  id: BUILD-BIONIC64-MYSQL
+  timeout: 3000s
+  waitFor: ["-"]
+  env:
+    - INSTANCE_ARGS=--image nestedvbox --machine-type=n1-standard-2 --preemptible --boot-disk-type=pd-ssd --boot-disk-size=50GB
+    - ZONE=europe-west4-a
+    - USERNAME=packer
+    - COMMAND=packer build -var "build_name=bionic64-mysql" -var "packages=mysql-server" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json  
+- name: gcr.io/$PROJECT_ID/vagrant
+  id: PUBLISH-BIONIC64-MYSQL
+  timeout: 3000s
+  waitFor:
+  - BUILD-BIONIC64-MYSQL
+  env:
+    - ATLAS_TOKEN=${_TOKEN}
+  args:
+  - 'cloud'
+  - 'publish'
+  - 'kikitux/bionic64-mysql'
+  - '$TAG_NAME'
+  - 'virtualbox'
+  - 'bionic64-mysql/package.box'
+  - '--release'
+  - '--force'   
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-DEV
   timeout: 3000s
