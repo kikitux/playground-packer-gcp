@@ -15,6 +15,9 @@ timeout: 9000s
 steps:
 EOF
 
+  #waitFor:
+  #- BUILD-BIONIC64-${b^^}
+
 for b in ${!build[*]}; do 
 cat <<EOF
 - name: gcr.io/\$PROJECT_ID/remote-builder
@@ -29,8 +32,6 @@ cat <<EOF
 - name: gcr.io/\$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-${b^^}
   timeout: 3000s
-  waitFor:
-  - BUILD-BIONIC64-${b^^}
   env:
     - ATLAS_TOKEN=\${_TOKEN}
   args:
