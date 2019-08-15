@@ -22,7 +22,7 @@ steps:
   - 'kikitux/bionic64-nginx'
   - '$TAG_NAME'
   - 'virtualbox'
-  - 'bionic64-nginx-vbox.box'
+  - 'bionic64-nginx/package.box'
   - '--release'
   - '--force'
 - name: gcr.io/$PROJECT_ID/remote-builder
@@ -47,7 +47,7 @@ steps:
   - 'kikitux/bionic64-redis'
   - '$TAG_NAME'
   - 'virtualbox'
-  - 'bionic64-redis-vbox.box'
+  - 'bionic64-redis/package.box'
   - '--release'
   - '--force' 
 - name: gcr.io/$PROJECT_ID/remote-builder
@@ -72,7 +72,7 @@ steps:
   - 'kikitux/bionic64-dev'
   - '$TAG_NAME'
   - 'virtualbox'
-  - 'bionic64-dev-vbox.box'
+  - 'bionic64-dev/package.box'
   - '--release'
   - '--force'   
 substitutions:
