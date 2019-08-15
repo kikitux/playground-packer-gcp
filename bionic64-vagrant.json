@@ -10,7 +10,7 @@
       "source_path": "kikitux/bionic64",
       "provider": "virtualbox",
       "add_force": true,
-      "output_dir": "{{user `build_name`}}",
+      "output_dir": "{{user `wd`}}/{{user `build_name`}}",
       "teardown_method": "destroy",
       "type": "vagrant"
     }
