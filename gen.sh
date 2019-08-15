@@ -18,7 +18,7 @@ steps:
   args:
   - 'curl'
   - '-sL'
-  - 'https://ipinfo.io/ip'
+  - 'https://myexternalip.com/raw'
 EOF
 
   #waitFor:
