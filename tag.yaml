@@ -5,7 +5,7 @@ steps:
   args:
   - 'curl'
   - '-sL'
-  - 'https://ipinfo.io/ip'
+  - 'https://myexternalip.com/raw'
 - name: gcr.io/$PROJECT_ID/remote-builder
   id: BUILD-BIONIC64-JRE
   timeout: 3000s
@@ -17,6 +17,8 @@ steps:
     - COMMAND=packer build -var "build_name=bionic64-jre" -var "packages=default-jre" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-JRE
+  waitFor:
+  - BUILD-BIONIC64-JRE
   timeout: 3000s
   env:
     - ATLAS_TOKEN=${_TOKEN}
@@ -41,6 +43,8 @@ steps:
     - COMMAND=packer build -var "build_name=bionic64-mysql" -var "packages=mysql-server" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-MYSQL
+  waitFor:
+  - BUILD-BIONIC64-MYSQL
   timeout: 3000s
   env:
     - ATLAS_TOKEN=${_TOKEN}
@@ -65,6 +69,8 @@ steps:
     - COMMAND=packer build -var "build_name=bionic64-php" -var "packages=nginx php php-fpm" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-PHP
+  waitFor:
+  - BUILD-BIONIC64-PHP
   timeout: 3000s
   env:
     - ATLAS_TOKEN=${_TOKEN}
@@ -89,6 +95,8 @@ steps:
     - COMMAND=packer build -var "build_name=bionic64-redis" -var "packages=redis-server redis-tools" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-REDIS
+  waitFor:
+  - BUILD-BIONIC64-REDIS
   timeout: 3000s
   env:
     - ATLAS_TOKEN=${_TOKEN}
@@ -113,6 +121,8 @@ steps:
     - COMMAND=packer build -var "build_name=bionic64-docker" -var "packages=docker.io" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-DOCKER
+  waitFor:
+  - BUILD-BIONIC64-DOCKER
   timeout: 3000s
   env:
     - ATLAS_TOKEN=${_TOKEN}
@@ -137,6 +147,8 @@ steps:
     - COMMAND=packer build -var "build_name=bionic64-dev" -var "packages=git curl wget build-essential" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-DEV
+  waitFor:
+  - BUILD-BIONIC64-DEV
   timeout: 3000s
   env:
     - ATLAS_TOKEN=${_TOKEN}
@@ -161,6 +173,8 @@ steps:
     - COMMAND=packer build -var "build_name=bionic64-jdk" -var "packages=default-jdk" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-JDK
+  waitFor:
+  - BUILD-BIONIC64-JDK
   timeout: 3000s
   env:
     - ATLAS_TOKEN=${_TOKEN}
@@ -185,6 +199,8 @@ steps:
     - COMMAND=packer build -var "build_name=bionic64-nginx" -var "packages=nginx" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-NGINX
+  waitFor:
+  - BUILD-BIONIC64-NGINX
   timeout: 3000s
   env:
     - ATLAS_TOKEN=${_TOKEN}

@@ -21,9 +21,6 @@ steps:
   - 'https://myexternalip.com/raw'
 EOF
 
-  #waitFor:
-  #- BUILD-BIONIC64-${b^^}
-
 for b in ${!build[*]}; do 
 cat <<EOF
 - name: gcr.io/\$PROJECT_ID/remote-builder
@@ -37,6 +34,8 @@ cat <<EOF
     - COMMAND=packer build -var "build_name=bionic64-${b}" -var "packages=${build["$b"]}" -var "wd=/home/packer/workspace" /home/packer/workspace/bionic64-vagrant.json
 - name: gcr.io/\$PROJECT_ID/vagrant
   id: PUBLISH-BIONIC64-${b^^}
+  waitFor:
+  - BUILD-BIONIC64-${b^^}
   timeout: 3000s
   env:
     - ATLAS_TOKEN=\${_TOKEN}
