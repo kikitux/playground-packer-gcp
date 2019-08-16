@@ -18,6 +18,12 @@
   "provisioners": [
     {
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
+      "expect_disconnect": true,
+      "script": "{{user `wd`}}/scripts/stop_apt-autoupdate.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
       "environment_vars": [
         "packages={{user `packages`}}"
       ],
