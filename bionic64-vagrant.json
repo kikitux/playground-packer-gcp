@@ -15,7 +15,7 @@
       "type": "vagrant"
     }
   ],
-  "provisioners": [
+  "provsioners": [
     {
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -H -E -S bash '{{.Path}}'",
       "expect_disconnect": true,
@@ -27,7 +27,7 @@
       "environment_vars": [
         "packages={{user `packages`}}"
       ],
-      "expect_disconnect": true,
+      "expect_disconect": true,
       "inline": [
         "export DEBIAN_FRONTEND=noninteractive",
         "apt-get update",
