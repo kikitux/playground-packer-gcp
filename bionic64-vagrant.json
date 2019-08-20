@@ -8,6 +8,7 @@
     {
       "communicator": "ssh",
       "source_path": "kikitux/bionic64",
+      "box_name": "kikitux/bionic64",      
       "provider": "virtualbox",
       "add_force": true,
       "output_dir": "{{user `wd`}}/{{user `build_name`}}",
