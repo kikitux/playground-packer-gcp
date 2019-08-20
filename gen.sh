@@ -9,6 +9,7 @@ build["docker"]="docker.io"
 build["jdk"]="default-jdk"
 build["jre"]="default-jre"
 build["dev"]="git curl wget build-essential"
+build["golang"]="golang"
 
 cat <<EOF
 timeout: 9000s
